@@ -1,0 +1,71 @@
+---
+export interface Props {
+  categories: string[];
+  activeCategory?: string;
+}
+
+const { categories, activeCategory = '' } = Astro.props;
+const allLabel = '全部';
+---
+
+<div class="filter-bar">
+  <button
+    class="filter-btn"
+    class:list={{ active: activeCategory === '' }}
+    data-category=""
+  >{allLabel}</button>
+  {categories.map(cat => (
+    <button
+      class="filter-btn"
+      class:list={{ active: activeCategory === cat }}
+      data-category={cat}
+    >{cat}</button>
+  ))}
+</div>
+
+<style>
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .filter-btn.active {
+    background: var(--accent-gradient);
+    color: white;
+    border-color: transparent;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const category = btn.dataset.category || '';
+      document.querySelectorAll('.card').forEach(card => {
+        const matches = !category || card.dataset.category === category;
+        card.style.display = matches ? '' : 'none';
+      });
+    });
+  });
+</script>
