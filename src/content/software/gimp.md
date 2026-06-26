@@ -13,6 +13,8 @@ github: GNOME/gimp
 序号: 001
 发布时间: "2026-06-23"
 标签: [免费软件, 开源, PS平替, 图像处理]
+网盘:
+  夸克: "https://pan.quark.cn/s/6c2f96f781e8"
 ---
 
 # GIMP — PS 免费平替

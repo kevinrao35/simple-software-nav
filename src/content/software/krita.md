@@ -13,6 +13,8 @@ github: KDE/krita
 序号: 005
 发布时间: "2026-06-27"
 标签: [免费软件, 开源, Krita, 绘画软件, Procreate平替]
+网盘:
+  夸克: "https://pan.quark.cn/s/d0a95d0b10e9"
 ---
 
 # Krita — Procreate/PS 免费平替

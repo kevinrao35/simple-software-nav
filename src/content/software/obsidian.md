@@ -12,6 +12,8 @@
 序号: 003
 发布时间: "2026-06-25"
 标签: [免费软件, Obsidian, 笔记软件, Notion平替, 知识管理]
+网盘:
+  夸克: "https://pan.quark.cn/s/c3097e770812"
 ---
 
 # Obsidian — Notion 免费平替

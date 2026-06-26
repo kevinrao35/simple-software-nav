@@ -13,6 +13,8 @@ github: massgravel/Microsoft-Activation-Scripts
 序号: 011
 发布时间: "2026-06-24"
 标签: [免费软件, 开源, 系统工具, Windows激活, Office激活]
+网盘:
+  夸克: "https://pan.quark.cn/s/b8f3c298813d"
 ---
 
 # MAS — Windows & Office 永久激活工具
