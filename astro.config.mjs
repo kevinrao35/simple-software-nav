@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://soft.chanxi.vip',
+  site: 'https://pangdonglai.us.kg',
   integrations: [
     sitemap({
       serialize(item) {
