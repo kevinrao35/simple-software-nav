@@ -13,6 +13,8 @@ github: ip7z/7zip
 序号: 007
 发布时间: "2026-06-29"
 标签: [免费软件, 开源, 7Zip, WinRAR平替, 解压缩]
+网盘:
+  夸克: "https://pan.quark.cn/s/3620c24e5a1e"
 ---
 
 # 7-Zip — WinRAR 免费平替
