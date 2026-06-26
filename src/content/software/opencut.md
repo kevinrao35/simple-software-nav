@@ -8,6 +8,7 @@
 平替: CapCut
 评分: 4.5
 官网: opencut.app
+github: OpenCut-app/OpenCut
 大小: "~50MB"
 序号: 009
 发布时间: "2026-06-24"

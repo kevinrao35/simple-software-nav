@@ -46,10 +46,40 @@ if (currentTitle) {
 
 // First line (after title) is the summary
 const summaryLine = sections.find(s => !s.title && s.content)?.content || '';
-const hasDownload = data.网盘 && (data.网盘.夸克 || data.网盘.腾讯微云);
+const hasDownload = data.网盘 && (data.网盘.夸克 || data.网盘.迅雷);
 ---
 
-<Layout title={`${data.软件名称} - ${data.英文名称}`}>
+<Layout
+  title={data.软件名称 === data.英文名称 ? data.软件名称 : `${data.软件名称} - ${data.英文名称}`}
+  description={`${data.软件名称}（${data.英文名称}）是一款${data.类别}软件，${data.价格}，支持${data.平台.join('/')}。${data.平替 && data.平替 !== '' ? '可替代 ' + data.平替 + '。' : ''}${data.开源 ? '开源免费。' : ''}评分 ${data.评分}/5。`}
+  type="website"
+  jsonLd={JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://soft.chanxi.vip/" },
+        { "@type": "ListItem", "position": 2, "name": data.类别, "item": `https://soft.chanxi.vip/#${data.类别}` },
+        { "@type": "ListItem", "position": 3, "name": data.软件名称 }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": data.软件名称,
+      "operatingSystem": data.平台.join(', '),
+      "applicationCategory": data.类别,
+      "description": entry.body?.trim().split('\n')[0]?.replace(/^#\s+/, '') || `${data.软件名称} - ${data.英文名称}`,
+      "url": data.官网 ? `https://${data.官网}` : undefined,
+      "offers": {
+        "@type": "Offer",
+        "price": data.价格 === '免费' ? '0' : data.价格,
+        "priceCurrency": "CNY"
+      },
+      ...(data.评分 ? { "aggregateRating": { "@type": "AggregateRating", "ratingValue": data.评分, "bestRating": "5" } } : {})
+    }
+  ])}
+>
   <div class="detail-hero">
     <div class="container">
       <div class="breadcrumb">
@@ -119,21 +149,23 @@ const hasDownload = data.网盘 && (data.网盘.夸克 || data.网盘.腾讯微�
           <h3>下载</h3>
           <div class="download-links">
             {hasDownload && data.网盘!.夸克 && (
-              <a href={data.网盘!.夸克} class="download-btn quark" target="_blank" rel="noopener">
+              <a href={data.网盘!.夸克} class="download-btn quark" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'quark'})}).catch(()=>{})`}>
                 夸克网盘下载
               </a>
             )}
-            {hasDownload && data.网盘!.腾讯微云 && (
-              <a href={data.网盘!.腾讯微云} class="download-btn tencent" target="_blank" rel="noopener">
-                腾讯微云下载
+            {hasDownload && data.网盘!.迅雷 && (
+              <a href={data.网盘!.迅雷} class="download-btn xunlei" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'xunlei'})}).catch(()=>{})`}>
+                迅雷网盘下载
               </a>
             )}
-            <a href={`https://${data.官网}`} class="download-btn official" target="_blank" rel="noopener">
+            <a href={`https://${data.官网}`} class="download-btn official" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'official'})}).catch(()=>{})`}>
               访问官网
             </a>
-            <a href={`https://github.com/${data.标签.find(t => t.startsWith('GitHub:'))?.replace('GitHub:', '') || data.官网}`} class="download-btn github" target="_blank" rel="noopener">
-              GitHub 仓库
-            </a>
+            {data.github && (
+              <a href={`https://github.com/${data.github}`} class="download-btn github" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'github'})}).catch(()=>{})`}>
+                GitHub 仓库
+              </a>
+            )}
           </div>
         </div>
       </aside>
@@ -303,7 +335,7 @@ const hasDownload = data.网盘 && (data.网盘.夸克 || data.网盘.腾讯微�
   .download-btn:hover { opacity: 0.85; }
 
   .download-btn.quark { background: #7c3aed; color: white; }
-  .download-btn.tencent { background: #2563eb; color: white; }
+  .download-btn.xunlei { background: #1d9bf0; color: white; }
   .download-btn.official { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
   .download-btn.github { background: #1e293b; color: white; }
 

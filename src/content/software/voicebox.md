@@ -8,10 +8,13 @@
 平替: ElevenLabs
 评分: 4.5
 官网: github.com/jamiepine/voicebox
+github: jamiepine/voicebox
 大小: "~200MB"
 序号: 008
 发布时间: "2026-06-24"
 标签: [免费软件, 开源, AI语音, ElevenLabs平替]
+网盘:
+  夸克: "https://pan.quark.cn/s/b8cdc7eeacf3"
 ---
 
 # Voicebox — ElevenLabs 免费平替

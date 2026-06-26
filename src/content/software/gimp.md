@@ -8,6 +8,7 @@
 平替: Photoshop
 评分: 4.5
 官网: gimp.org
+github: GNOME/gimp
 大小: "~200MB"
 序号: 001
 发布时间: "2026-06-23"

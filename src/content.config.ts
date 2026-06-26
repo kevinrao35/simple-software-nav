@@ -13,15 +13,29 @@ const software = defineCollection({
     平替: z.union([z.string(), z.array(z.string())]).optional().default(''),
     评分: z.number(),
     官网: z.string(),
+    github: z.string().optional(),
     大小: z.string(),
     序号: z.number(),
     发布时间: z.string(),
     标签: z.array(z.string()),
     网盘: z.object({
       夸克: z.string().optional(),
-      腾讯微云: z.string().optional(),
+      迅雷: z.string().optional(),
     }).optional(),
   }),
 });
 
-export const collections = { software };
+const tutorials = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/tutorials" }),
+  schema: z.object({
+    title: z.string(),
+    software: z.string(),
+    softwareSlug: z.string(),
+    difficulty: z.string(),
+    category: z.string(),
+    order: z.number(),
+    description: z.string(),
+  }),
+});
+
+export const collections = { software, tutorials };

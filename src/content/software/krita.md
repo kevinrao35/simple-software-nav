@@ -8,6 +8,7 @@
 平替: [Procreate, Photoshop]
 评分: 4.5
 官网: krita.org
+github: KDE/krita
 大小: "~200MB"
 序号: 005
 发布时间: "2026-06-27"

@@ -8,6 +8,7 @@
 平替: ""
 评分: 4.5
 官网: github.com/Panniantong/Agent-Reach
+github: Panniantong/Agent-Reach
 大小: "~10MB"
 序号: 010
 发布时间: "2026-06-24"

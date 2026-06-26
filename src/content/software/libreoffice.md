@@ -8,6 +8,7 @@
 平替: Microsoft Office
 评分: 4.5
 官网: libreoffice.org
+github: LibreOffice/core
 大小: "~800MB"
 序号: 002
 发布时间: "2026-06-24"

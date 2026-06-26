@@ -9,7 +9,10 @@ allSoftware.sort((a, b) => a.data.序号 - b.data.序号);
 const categories = [...new Set(allSoftware.map(s => s.data.类别))].sort();
 ---
 
-<Layout title="免费开源软件推荐">
+<Layout
+  title="免费开源软件推荐"
+  description="发现好用的免费开源软件，告别付费焦虑。收录 GIMP、LibreOffice、Obsidian、ShareX 等精选免费软件，提供详细评测、教程下载和付费替代方案推荐。"
+>
   <div class="hero">
     <h1>发现好用的免费软件</h1>
     <p>全部开源或免费，告别付费焦虑</p>

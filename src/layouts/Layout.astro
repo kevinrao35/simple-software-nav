@@ -2,9 +2,17 @@
 export interface Props {
   title?: string;
   description?: string;
+  image?: string;       // OG/Twitter 图片 URL
+  type?: 'website' | 'article';  // OG type
+  canonical?: string;   // 规范 URL
+  jsonLd?: string;      // JSON-LD 结构化数据
 }
 
-const { title = '简单软件', description = '免费、开源、靠谱的软件推荐导航站' } = Astro.props;
+const { title = '简单软件', description = '免费、开源、靠谱的软件推荐导航站', image, type = 'website', canonical, jsonLd } = Astro.props;
+const siteUrl = 'https://soft.chanxi.vip';
+const fullTitle = title === '简单软件' ? title : `${title} | 简单软件`;
+const ogImage = image || `${siteUrl}/favicon.svg`;
+const pageUrl = canonical || (Astro.url ? Astro.url.href : siteUrl);
 ---
 
 <!doctype html>
@@ -14,8 +22,45 @@ const { title = '简单软件', description = '免费、开源、靠谱的软件
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <title>{title} | 简单软件</title>
+    <meta name="keywords" content="免费软件,开源软件,软件推荐,{title},替代品,平替" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={pageUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:site_name" content="简单软件" />
+    <meta property="og:type" content={type} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="zh_CN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+
+    <script>
+      // 页面浏览追踪
+      const ANALYTICS_URL = 'http://localhost:3001';
+
+      fetch(`${ANALYTICS_URL}/api/track/page`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          path: window.location.pathname,
+          title: document.title.replace(' | 简单软件', '')
+        })
+      }).catch(() => {});
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -24,6 +69,10 @@ const { title = '简单软件', description = '免费、开源、靠谱的软件
           <span class="logo-icon">&#9670;</span>
           <span class="logo-text">简单软件</span>
         </a>
+        <nav class="site-nav">
+          <a href="/">首页</a>
+          <a href="/tutorials">教程</a>
+        </nav>
         <p class="tagline">免费 · 开源 · 靠谱</p>
       </div>
     </header>
@@ -112,6 +161,23 @@ const { title = '简单软件', description = '免费、开源、靠谱的软件
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
+  }
+
+  .site-nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .site-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+
+  .site-nav a:hover {
+    color: var(--accent);
   }
 
   .tagline {

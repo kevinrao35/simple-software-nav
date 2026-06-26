@@ -8,6 +8,7 @@
 平替: ""
 评分: 4.5
 官网: massgrave.dev
+github: massgravel/Microsoft-Activation-Scripts
 大小: "~5MB"
 序号: 011
 发布时间: "2026-06-24"

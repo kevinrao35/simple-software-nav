@@ -1,0 +1,199 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allTutorials = await getCollection('tutorials');
+allTutorials.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout
+  title="软件使用教程"
+  description="手把手教你用好每一款免费开源软件。涵盖 GIMP、LibreOffice、Obsidian、ShareX、Krita、DaVinci Resolve 等精选软件的详细入门到进阶教程。"
+>
+  <div class="hero">
+    <h1>软件使用教程</h1>
+    <p>手把手教你用好每一款免费开源软件</p>
+  </div>
+
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">全部教程 <span class="count">({allTutorials.length})</span></h2>
+    </div>
+
+    <div class="tutorial-grid">
+      {allTutorials.map(t => (
+        <a href={`/tutorials/${t.id}`} class="tutorial-card">
+          <div class="card-top">
+            <span class="card-order">#{String(t.data.order).padStart(3, '0')}</span>
+            <span class="difficulty" data-level={t.data.difficulty}>
+              {t.data.difficulty === 'beginner' ? '入门' : t.data.difficulty === 'intermediate' ? '进阶' : '高级'}
+            </span>
+          </div>
+          <h3 class="card-title">{t.data.software}：{t.data.title}</h3>
+          <p class="card-desc">{t.data.description}</p>
+          <div class="card-bottom">
+            <span class="card-category">{t.data.category}</span>
+            <span class="read-more">阅读教程 &rarr;</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {allTutorials.length === 0 && (
+      <div class="empty">教程正在编写中，敬请期待...</div>
+    )}
+  </div>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #FF2442, #FF6B81);
+    color: white;
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  .section-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .section-title .count {
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  .tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .tutorial-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+  }
+
+  .tutorial-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--accent-light);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-order {
+    font-family: 'Inter', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+  }
+
+  .difficulty {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+
+  .difficulty[data-level="beginner"] {
+    background: #ecfdf5;
+    color: #059669;
+  }
+
+  .difficulty[data-level="intermediate"] {
+    background: #fef3c7;
+    color: #d97706;
+  }
+
+  .difficulty[data-level="advanced"] {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .card-category {
+    font-size: 0.75rem;
+    color: var(--tag-text);
+    background: var(--tag-bg);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .read-more {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 60px 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 32px 16px; }
+    .hero h1 { font-size: 1.5rem; }
+    .container { padding: 24px 16px; }
+    .tutorial-grid { grid-template-columns: 1fr; }
+  }
+</style>
