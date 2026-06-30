@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://soft.chanxi.vip/sitemap-index.xml
