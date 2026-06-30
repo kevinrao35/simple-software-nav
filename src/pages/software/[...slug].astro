@@ -1,0 +1,355 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const software = await getCollection('software');
+  return software.map(s => ({
+    params: { slug: s.id },
+    props: { entry: s },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+function stars(rating: number) {
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.5 ? 1 : 0;
+  return '★'.repeat(full) + (half ? '☆' : '') + '☆'.repeat(5 - full - half);
+}
+
+// Parse body to extract sections
+const body = entry.body || '';
+const sections: { title: string; content: string }[] = [];
+const lines = body.split('\n');
+let currentTitle = '';
+let currentContent: string[] = [];
+
+for (const line of lines) {
+  if (line.startsWith('## ')) {
+    if (currentTitle) {
+      sections.push({ title: currentTitle, content: currentContent.join('\n').trim() });
+    }
+    currentTitle = line.replace('## ', '').trim();
+    currentContent = [];
+  } else if (line.startsWith('# ') || line.startsWith('---')) {
+    // skip headings and frontmatter
+    continue;
+  } else {
+    currentContent.push(line);
+  }
+}
+if (currentTitle) {
+  sections.push({ title: currentTitle, content: currentContent.join('\n').trim() });
+}
+
+// First line (after title) is the summary
+const summaryLine = sections.find(s => !s.title && s.content)?.content || '';
+const hasDownload = data.网盘 && (data.网盘.夸克 || data.网盘.迅雷);
+---
+
+<Layout
+  title={data.软件名称 === data.英文名称 ? data.软件名称 : `${data.软件名称} - ${data.英文名称}`}
+  description={`${data.软件名称}（${data.英文名称}）是一款${data.类别}软件，${data.价格}，支持${data.平台.join('/')}。${data.平替 && data.平替 !== '' ? '可替代 ' + data.平替 + '。' : ''}${data.开源 ? '开源免费。' : ''}评分 ${data.评分}/5。`}
+  type="website"
+  jsonLd={JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://soft.chanxi.vip/" },
+        { "@type": "ListItem", "position": 2, "name": data.类别, "item": `https://soft.chanxi.vip/#${data.类别}` },
+        { "@type": "ListItem", "position": 3, "name": data.软件名称 }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": data.软件名称,
+      "operatingSystem": data.平台.join(', '),
+      "applicationCategory": data.类别,
+      "description": entry.body?.trim().split('\n')[0]?.replace(/^#\s+/, '') || `${data.软件名称} - ${data.英文名称}`,
+      "url": data.官网 ? `https://${data.官网}` : undefined,
+      "offers": {
+        "@type": "Offer",
+        "price": data.价格 === '免费' ? '0' : data.价格,
+        "priceCurrency": "CNY"
+      },
+      ...(data.评分 ? { "aggregateRating": { "@type": "AggregateRating", "ratingValue": data.评分, "bestRating": "5" } } : {})
+    }
+  ])}
+>
+  <div class="detail-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">&larr; 返回首页</a>
+        <span class="sep">/</span>
+        <span>{data.类别}</span>
+      </div>
+      <div class="detail-header">
+        <div class="detail-title-group">
+          <h1>{data.软件名称}</h1>
+          <span class="detail-en">{data.英文名称}</span>
+        </div>
+        <div class="detail-rating">
+          <span class="stars">{stars(data.评分)}</span>
+          <span class="score">{data.评分}</span>
+        </div>
+      </div>
+      <div class="detail-tags">
+        {data.标签.map(t => <span class="tag">{t}</span>)}
+        {data.开源 && <span class="tag tag-open">开源</span>}
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="detail-layout">
+      <div class="detail-main">
+        {sections.filter(s => s.title).map(section => (
+          <div class="section-block">
+            <h2>{section.title}</h2>
+            <div class="section-content">
+              {section.content.split('\n').filter(l => l.trim()).map(line => {
+                if (line.startsWith('- ')) {
+                  const html = line.replace(/^- /, '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                  return <p class="list-item" set:html={html} />;
+                }
+                const html = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/^#\s+/, '');
+                return <p set:html={html} />;
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="info-card">
+          <h3>软件信息</h3>
+          <dl class="info-list">
+            <dt>类别</dt>
+            <dd>{data.类别}</dd>
+            <dt>价格</dt>
+            <dd class="price-free">{data.价格}</dd>
+            <dt>平台</dt>
+            <dd>{data.平台.join(' / ')}</dd>
+            <dt>大小</dt>
+            <dd>{data.大小}</dd>
+            {data.平替 && data.平替 !== '' && (
+              <>
+                <dt>平替</dt>
+                <dd>{typeof data.平替 === 'string' ? data.平替 : data.平替.join(' / ')}</dd>
+              </>
+            )}
+          </dl>
+        </div>
+
+        <div class="download-card">
+          <h3>下载</h3>
+          <div class="download-links">
+            {hasDownload && data.网盘!.夸克 && (
+              <a href={data.网盘!.夸克} class="download-btn quark" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'quark'})}).catch(()=>{})`}>
+                夸克网盘下载
+              </a>
+            )}
+            {hasDownload && data.网盘!.迅雷 && (
+              <a href={data.网盘!.迅雷} class="download-btn xunlei" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'xunlei'})}).catch(()=>{})`}>
+                迅雷网盘下载
+              </a>
+            )}
+            <a href={`https://${data.官网}`} class="download-btn official" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'official'})}).catch(()=>{})`}>
+              访问官网
+            </a>
+            {data.github && (
+              <a href={`https://github.com/${data.github}`} class="download-btn github" target="_blank" rel="noopener" onclick={`fetch('http://localhost:3001/api/track/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({software:${JSON.stringify(data.软件名称)},type:'github'})}).catch(()=>{})`}>
+                GitHub 仓库
+              </a>
+            )}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .detail-hero {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .sep { margin: 0 8px; }
+
+  .detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .detail-title-group h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .detail-en {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .detail-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .stars { color: var(--rating-color); font-size: 1.3rem; letter-spacing: 2px; }
+  .score { font-size: 1.5rem; font-weight: 700; color: var(--rating-color); }
+
+  .detail-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-weight: 500;
+  }
+
+  .tag-open { background: #ecfdf5; color: #059669; }
+
+  .detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 32px;
+    padding: 32px 0;
+  }
+
+  .section-block {
+    margin-bottom: 28px;
+  }
+
+  .section-block h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+
+  .section-content p {
+    margin-bottom: 8px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .section-content :global(.list-item) {
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .section-content :global(.list-item)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .info-card, .download-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .info-card h3, .download-card h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .info-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+    font-size: 0.875rem;
+  }
+
+  .info-list dt {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .info-list dd {
+    color: var(--text);
+  }
+
+  .price-free { color: #059669; font-weight: 600; }
+
+  .download-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .download-btn {
+    display: block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: opacity 0.15s;
+  }
+
+  .download-btn:hover { opacity: 0.85; }
+
+  .download-btn.quark { background: #7c3aed; color: white; }
+  .download-btn.xunlei { background: #1d9bf0; color: white; }
+  .download-btn.official { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+  .download-btn.github { background: #1e293b; color: white; }
+
+  @media (max-width: 768px) {
+    .detail-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .detail-header {
+      flex-direction: column;
+    }
+
+    .detail-title-group h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
