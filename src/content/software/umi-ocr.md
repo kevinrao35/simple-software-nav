@@ -13,6 +13,8 @@ github: hiroi-sora/Umi-OCR
 序号: 16
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, OCR, 办公效率, 文字识别"]
+网盘:
+  夸克: "https://pan.quark.cn/s/be3562e3776842dbbdd57948aa956172"
 ---
 
 # Umi-OCR — 1Password 免费平替

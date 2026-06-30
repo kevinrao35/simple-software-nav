@@ -13,6 +13,8 @@ github: syncthing/syncthing
 序号: 23
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 文件同步, P2P, 替代云盘"]
+网盘:
+  夸克: "https://pan.quark.cn/s/6d5b391b26704ba79330ff9e56da1758"
 ---
 
 # Syncthing — P2P 文件同步 免费平替

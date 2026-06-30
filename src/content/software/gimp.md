@@ -14,7 +14,11 @@ github: GNOME/gimp
 发布时间: "2026-06-23"
 标签: [免费软件, 开源, PS平替, 图像处理]
 网盘:
-  夸克: "https://pan.quark.cn/s/6c2f96f781e8"
+  夸克: "https://pan.quark.cn/s/87032760874d46a8a34130a5a023bd25"
+  # GIMP-3.2.4-x86_64.AppImage: "https://pan.quark.cn/s/90b287b0cce64156bcbbb04d614b542d"
+  # gimp-3.2.4-x86_64.dmg: "https://pan.quark.cn/s/63d92ee6851f4d85a42be871dbfd15fa"
+  # GIMP-3.2.4-x86_64.AppImage: "https://pan.quark.cn/s/580564cabc264abeab108fba0c591f1f"
+  # gimp-3.2.4-x86_64.dmg: "https://pan.quark.cn/s/73b0ef54a1ca49be95d95d41086636ef"
 ---
 
 # GIMP — PS 免费平替

@@ -14,7 +14,7 @@ github: ShareX/ShareX
 发布时间: "2026-06-26"
 标签: [免费软件, 开源, ShareX, 截图工具, 效率工具]
 网盘:
-  夸克: "https://pan.quark.cn/s/49ebe916e8dd"
+  夸克: "https://pan.quark.cn/s/d8339fa56693400abc026d78a8892f58"
 ---
 
 # ShareX — 最强免费截图工具

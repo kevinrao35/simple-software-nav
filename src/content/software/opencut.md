@@ -14,7 +14,7 @@ github: OpenCut-app/OpenCut
 发布时间: "2026-06-24"
 标签: [免费软件, 开源, 视频剪辑, 剪映平替]
 网盘:
-  夸克: "https://pan.quark.cn/s/cfe4e229b9a0"
+  夸克: "https://pan.quark.cn/s/bd025132c153470382a5cc775f16fb2b"
 ---
 
 # OpenCut — 剪映（CapCut）免费平替

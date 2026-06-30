@@ -13,6 +13,8 @@ github: koala73/worldmonitor
 序号: 18
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 网络工具, 实时数据"]
+网盘:
+  夸克: "https://pan.quark.cn/s/128dfad5847143dbb78ccfeae53ca9a0"
 ---
 
 # World Monitor — 全球事件仪表板 免费平替

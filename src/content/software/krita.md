@@ -14,7 +14,9 @@ github: KDE/krita
 发布时间: "2026-06-27"
 标签: [免费软件, 开源, Krita, 绘画软件, Procreate平替]
 网盘:
-  夸克: "https://pan.quark.cn/s/d0a95d0b10e9"
+  夸克: "https://pan.quark.cn/s/30d89bc4c3c04631ae86b74a8b9d2610"
+  # krita-5.3.2.1-x86_64.AppImage: "https://pan.quark.cn/s/d700828913564a07af8f1536be1706f8"
+  # krita-5.3.2.1-x86_64.AppImage: "https://pan.quark.cn/s/6f36571da2ee46f5a4e01a2905c468a0"
 ---
 
 # Krita — Procreate/PS 免费平替

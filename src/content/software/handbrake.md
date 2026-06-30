@@ -13,6 +13,8 @@ github: HandBrake/HandBrake
 序号: 27
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 视频剪辑, 视频压缩, 转码"]
+网盘:
+  夸克: "https://pan.quark.cn/s/98231b6a0362461294fcaa6207f993b8"
 ---
 
 # HandBrake — 视频转码压缩 免费平替

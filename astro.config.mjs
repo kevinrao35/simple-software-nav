@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://pangdonglai.us.kg',
+  site: 'https://kevinrao35.github.io/simple-software-nav',
   integrations: [
     sitemap({
       serialize(item) {

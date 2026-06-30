@@ -14,7 +14,7 @@ github: jamiepine/voicebox
 发布时间: "2026-06-24"
 标签: [免费软件, 开源, AI语音, ElevenLabs平替]
 网盘:
-  夸克: "https://pan.quark.cn/s/b8cdc7eeacf3"
+  夸克: "https://pan.quark.cn/s/21d8938d3b0b4c8095a7d90168bd0285"
 ---
 
 # Voicebox — ElevenLabs 免费平替

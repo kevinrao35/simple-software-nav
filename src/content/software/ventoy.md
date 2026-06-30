@@ -13,6 +13,8 @@ github: ventoy/Ventoy
 序号: 24
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 系统优化, U盘启动, 系统重装"]
+网盘:
+  夸克: "https://pan.quark.cn/s/0aba017a35984bab9e8e52af52d5a23b"
 ---
 
 # Ventoy — 启动 U 盘制作 免费平替

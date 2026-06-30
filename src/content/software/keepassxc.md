@@ -13,6 +13,10 @@ github: keepassxreboot/keepassxc
 序号: 22
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 安全隐私, 密码管理"]
+网盘:
+  夸克: "https://pan.quark.cn/s/8f4727b4fc4c4b1499f69edef6c9417c"
+  # KeePassXC-2.7.12-arm64.dmg: "https://pan.quark.cn/s/184a639f0b6a40a282ae10c5e875ba6b"
+  # KeePassXC-2.7.12-arm64.dmg: "https://pan.quark.cn/s/eb09d61db4a048deb1dc15c87fa34703"
 ---
 
 # KeePassXC — 密码管理器 免费平替

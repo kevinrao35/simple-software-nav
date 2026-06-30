@@ -13,6 +13,8 @@ github: marktext/marktext
 序号: 29
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, Markdown, 笔记工具, Typora平替"]
+网盘:
+  夸克: "https://pan.quark.cn/s/edf4c77c2c9d4ecf9041ffb5762a8258"
 ---
 
 # MarkText — Typora 平替 免费平替

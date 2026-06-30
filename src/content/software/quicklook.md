@@ -13,6 +13,8 @@ github: QL-Win/QuickLook
 序号: 28
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 办公效率, 文件预览"]
+网盘:
+  夸克: "https://pan.quark.cn/s/56ca23a702184dd6aaeceab5b9c0982f"
 ---
 
 # QuickLook — 空格预览文件 免费平替

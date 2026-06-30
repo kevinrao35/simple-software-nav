@@ -13,6 +13,8 @@ github: obsproject/obs-studio
 序号: 26
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 录屏, 直播, OBS"]
+网盘:
+  夸克: "https://pan.quark.cn/s/884166a6874044edb712ef370ae341fe"
 ---
 
 # OBS Studio — 录屏直播软件 免费平替

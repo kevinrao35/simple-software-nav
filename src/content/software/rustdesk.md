@@ -13,6 +13,10 @@ github: rustdesk/rustdesk
 序号: 20
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 远程桌面, 网络工具, TeamViewer平替"]
+网盘:
+  夸克: "https://pan.quark.cn/s/9cf88b3002a1464e98364f7bdb0cf3e1"
+  # rustdesk-1.4.8-x86_64.deb: "https://pan.quark.cn/s/752fbde959574f85977c8d7cde6d81bd"
+  # rustdesk-1.4.8-x86_64.deb: "https://pan.quark.cn/s/dbc1da1c41ff424abbb15b8d77164d5f"
 ---
 
 # RustDesk — TeamViewer 平替 免费平替

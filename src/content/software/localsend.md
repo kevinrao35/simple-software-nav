@@ -13,6 +13,10 @@ github: localsend/localsend
 序号: 25
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 文件传输, 局域网, AirDrop平替"]
+网盘:
+  夸克: "https://pan.quark.cn/s/2ca0dce4080b4d4f8c8a269bd3d08210"
+  # LocalSend-1.17.0-android-arm64v8.apk: "https://pan.quark.cn/s/579b718419c84eb6904061b3c1a866c8"
+  # LocalSend-1.17.0-android-arm64v8.apk: "https://pan.quark.cn/s/07ff32cfa92249fbaf8d03635e0128b9"
 ---
 
 # LocalSend — 局域网文件传输 免费平替

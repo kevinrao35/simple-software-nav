@@ -13,6 +13,8 @@ github: koodo-reader/koodo-reader
 序号: 30
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 电子书, 阅读器, 笔记工具"]
+网盘:
+  夸克: "https://pan.quark.cn/s/1c8bf85cc1e64c21a54770b464c0c5bb"
 ---
 
 # Koodo Reader — 电子书阅读器 免费平替

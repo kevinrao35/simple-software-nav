@@ -13,6 +13,8 @@ github: Flow-Launcher/Flow.Launcher
 序号: 32
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 办公效率, 启动器, Everything平替"]
+网盘:
+  夸克: "https://pan.quark.cn/s/6c2e8f1d3427400cae4b54272a221899"
 ---
 
 # Flow Launcher — 启动器搜索 免费平替

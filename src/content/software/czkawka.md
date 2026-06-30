@@ -13,6 +13,8 @@ github: qarmin/czkawka
 序号: 21
 发布时间: "2026-06-26"
 标签: ["免费软件, 开源, 系统优化, 磁盘清理, Rust"]
+网盘:
+  夸克: "https://pan.quark.cn/s/c0ca5493993e4c79a9af2b6e6c67e870"
 ---
 
 # Czkawka — 重复文件清理 免费平替

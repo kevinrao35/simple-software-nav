@@ -14,7 +14,7 @@ github: LibreOffice/core
 发布时间: "2026-06-24"
 标签: [免费软件, 开源, Office平替, 办公软件]
 网盘:
-  夸克: "https://pan.quark.cn/s/3f02d8787662"
+  夸克: "https://pan.quark.cn/s/d96024b4d66e4d4c99154642d3f6fdc2"
 ---
 
 # LibreOffice — Office 免费平替
